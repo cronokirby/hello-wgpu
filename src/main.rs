@@ -57,7 +57,10 @@ impl State {
     }
 
     fn resize(&mut self, new_size: winit::dpi::PhysicalSize<u32>) {
-        todo!()
+        self.size = new_size;
+        self.sc_desc.width = new_size.width;
+        self.sc_desc.height = new_size.height;
+        self.swap_chain = self.device.create_swap_chain(&self.surface, &self.sc_desc);
     }
 
     fn input(&mut self, event: &WindowEvent) -> bool {
@@ -94,6 +97,12 @@ fn main() {
                 } => *control_flow = ControlFlow::Exit,
                 _ => {}
             },
+            WindowEvent::Resized(physical_size) => {
+                state.resize(*physical_size);
+            }
+            WindowEvent::ScaleFactorChanged { new_inner_size, .. } => {
+                state.resize(**new_inner_size);
+            }
             _ => {}
         },
         _ => {}
