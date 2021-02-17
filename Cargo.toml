@@ -1,5 +1,5 @@
 [package]
-name = "hello-webgpu"
+name = "hello-wgpu"
 version = "0.1.0"
 authors = ["Lúcás Meier <cronokirby@gmail.com>"]
 edition = "2018"
